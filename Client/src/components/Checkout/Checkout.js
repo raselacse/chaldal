@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Jumbotron, Button, Table } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -8,17 +8,27 @@ import fakeData from '../../fakeData';
 const Checkout = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const { key } = useParams()
-    const product = fakeData.find(pd => pd.key === key)
+    const [products, setProducts] = useState([]);
+    useEffect(()=>{
+        fetch('http://localhost:27017/products')
+        .then(res => res.json())
+        .then(data => {
+            setProducts(data)
+        })
+    },[])
+    
+    const product = fakeData.find(pd => pd.key === key)    
     const { category, price } = product;
     const productDetails = {category, price}
-    const [selectedDate, setSelectedDate] = useState({
-        checkIn: new Date()
-    });
-    const handleCheckInDate = (date) => {
-        const newDates = { ...selectedDate }
-        newDates.checkIn = date;
-        setSelectedDate(newDates);
-    };
+
+    // const [selectedDate, setSelectedDate] = useState({
+    //     checkIn: new Date()
+    // });
+    // const handleCheckInDate = (date) => {
+    //     const newDates = { ...selectedDate }
+    //     newDates.checkIn = date;
+    //     setSelectedDate(newDates);
+    // };
 
     const handleOrder = () => {
         const order = { ...loggedInUser, ...productDetails};
@@ -32,6 +42,7 @@ const Checkout = () => {
             .then((response) => response.json())
             .then((json) => console.log(json));
     }
+    
     return (
         <>
             <Jumbotron>
