@@ -22,16 +22,19 @@ const Login = () => {
         firebase.auth()
             .signInWithPopup(provider)
             .then((result) => {
-                var credential = result.credential;
-                var token = credential.accessToken;
-                var user = result.user;
-                setLoggedInUser(user)
+                // var credential = result.credential;
+                // var token = credential.accessToken;
+                // var user = result.user;
+                const {displayName, email} = result.user;
+                const signedInUser = {name: displayName, email} 
+                setLoggedInUser(signedInUser);
                 history.replace(from);
             }).catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 var email = error.email;
                 var credential = error.credential;
+                console.log(errorCode,errorMessage,email,credential)
             });
     }
     return (
