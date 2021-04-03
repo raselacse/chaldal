@@ -9,8 +9,8 @@ const Checkout = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const { key } = useParams()
     const product = fakeData.find(pd => pd.key === key)
-    const { name, price } = product;
-    const productDetails = {name, price}
+    const { category, price } = product;
+    const productDetails = {category, price}
     const [selectedDate, setSelectedDate] = useState({
         checkIn: new Date()
     });
@@ -45,14 +45,14 @@ const Checkout = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{name}</td>
+                            <td>{category}</td>
                             <td>{1}</td>
-                            <td>{price}</td>
+                            <td>${price}</td>
                         </tr>
                         <tr>
                             <td>Total</td>
                             <td></td>
-                            <td>{price}</td>
+                            <td>${price}</td>
                         </tr>
                     </tbody>
                 </Table>

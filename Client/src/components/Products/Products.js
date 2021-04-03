@@ -3,13 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Products = (props) => {
-    const { category, img, seller, price, stock, key } = props.product;
+    const { category, image, price, key } = props.product;
 
     return (
         <>
             <CardDeck className="py-5 text-center">
                 <Card>
-                    <Card.Img variant="top" src={img} />
+                    <Card.Img variant="top" src={image} />
                     <Card.Body>
                         <Card.Title>{category}</Card.Title>
                     </Card.Body>
