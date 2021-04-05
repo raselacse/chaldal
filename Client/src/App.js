@@ -1,6 +1,5 @@
 import React, { createContext, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddProduct from '../src/components/addProduct/addProduct';
 import Home from '../src/components/Home/Home';
 import Checkout from '../src/components/Checkout/Checkout';
 import Login from '../src/components/Login/Login';
@@ -10,6 +9,7 @@ import Header from './components/Header/Header';
 import ManageProduct from './components/ManageProduct/ManageProduct';
 import Orders from './components/Orders/Orders';
 import Admin from './components/Admin/Admin';
+import AddProduct from '../src/components/AddProduct/AddProduct';
 
 export const UserContext = createContext();
 
@@ -29,12 +29,12 @@ function App() {
               <Route path='/admin'>
                 <Admin />
               </Route>
-              <Route path='/checkout/:key'>
+              <PrivateRoute path='/checkout/:key'>
                 <Checkout />
-              </Route>
-              <Route path='/orders'>
+              </PrivateRoute>
+              <PrivateRoute path='/orders'>
                 <Orders />
-              </Route>
+              </PrivateRoute>
               <Route path='/login'>
                 <Login />
               </Route>

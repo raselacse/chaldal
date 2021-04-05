@@ -1,15 +1,16 @@
 import { Button, Card, CardDeck } from 'react-bootstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Products.css'
 
 const Products = (props) => {
     const { category, image, price, key } = props.product;
 
     return (
         <>
-            <CardDeck className="py-5 text-center">
+            <CardDeck className="text-center py-3 col-md-6 col-lg-3">
                 <Card>
-                    <Card.Img variant="top" src={image} />
+                    <Card.Img variant="top pt-3 m-auto img" src={image} />
                     <Card.Body>
                         <Card.Title>{category}</Card.Title>
                     </Card.Body>
@@ -19,7 +20,7 @@ const Products = (props) => {
                     </Card.Footer>
                 </Card>
             </CardDeck>
-        </>
+        </> 
     );
 };
 

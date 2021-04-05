@@ -21,9 +21,9 @@ const Checkout = () => {
     const { category, price } = product;
     const productDetails = {category, price}
 
-    // const [selectedDate, setSelectedDate] = useState({
-    //     checkIn: new Date()
-    // });
+    const [selectedDate, setSelectedDate] = useState({
+        date: new Date()
+    });
     // const handleCheckInDate = (date) => {
     //     const newDates = { ...selectedDate }
     //     newDates.checkIn = date;
@@ -31,7 +31,7 @@ const Checkout = () => {
     // };
 
     const handleOrder = () => {
-        const order = { ...loggedInUser, ...productDetails};
+        const order = { ...loggedInUser, ...productDetails, ...selectedDate};
         fetch('http://localhost:27017/orders', {
             method: 'POST',
             body: JSON.stringify(order),
