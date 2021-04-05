@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 require('dotenv').config()
 const app = express()
+const ObjectId = require('mongodb').ObjectId;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
@@ -24,7 +25,6 @@ client.connect(err => {
                 console.log(products);
                 adminCollection.insertOne(products)
                   .then(result => {
-                      console.log(result);
                     res.send(result.insertedCount > 0)
                   })
               }) 
@@ -34,11 +34,16 @@ client.connect(err => {
                     res.send(document)
                 })
               }) 
+              app.get('/manage-products', (req, res) => {
+                adminCollection.find({})
+                .toArray((err, document)=>{
+                    res.send(document)
+                })
+              }) 
             app.post('/orders', (req, res) => {
                 const order = req.body;
                 orderCollection.insertOne(order)
                   .then(result => {
-                      console.log(result);
                     res.send(result.insertedCount > 0)
                   })
               })
@@ -48,6 +53,12 @@ client.connect(err => {
                   .toArray((err, document) =>{
                       res.send(document);
                   })
+              })
+              app.delete('/delete/:id', (req, res) => {
+                adminCollection.deleteOne({_id: ObjectId(req.params.id)})
+                .then(result => {
+                  res.send(result.deletedCount > 0)
+                })
               })
 
             app.get('/', (req, res) => {

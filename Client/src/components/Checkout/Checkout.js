@@ -18,8 +18,8 @@ const Checkout = () => {
     },[])
     
     const product = fakeData.find(pd => pd.key === key)    
-    const { category, price } = product;
-    const productDetails = {category, price}
+    const { title, category, price, image } = product;
+    const productDetails = {title, category, price, image}
 
     const [selectedDate, setSelectedDate] = useState({
         date: new Date()

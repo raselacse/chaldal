@@ -4,14 +4,28 @@ import { Link } from 'react-router-dom';
 
 const ManageProduct = () => {
     const [products, setProducts] = useState([]);
-    console.log(products)
+
     useEffect(()=>{
-        fetch('http://localhost:27017/products')
+        fetch('http://localhost:27017/manage-products')
         .then(res => res.json())
         .then(data => {
             setProducts(data)
         })
     },[])
+    const deleteProduct = (e,id) =>{
+        fetch('http://localhost:27017/delete/' + id, {
+            method: "DELETE",
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data){
+                    e.target.parentNode.parentNode.style.display = "none"
+                }
+            })
+    }
     return (
         <>
             <div className="row">
@@ -29,18 +43,17 @@ const ManageProduct = () => {
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Weight</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><Button>Update</Button> <Button>Delete</Button></td>
-                                </tr>
+                                {products.map(pd => <tr key={pd._id}>
+                                    <td>{pd.category}</td>
+                                    <td>{pd.price}</td>
+                                    <td><Button onClick={(e)=>deleteProduct(e, pd._id)}>Delete</Button></td>
+                                </tr>)}
+                                
                             </tbody>
                         </Table>
                     </Jumbotron>
