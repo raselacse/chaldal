@@ -16,14 +16,12 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
     const productCollection = client.db("chaldal").collection("products");
     const orderCollection = client.db("chaldal").collection("orders");
-    const adminCollection = client.db("chaldal").collection("adminProducts");
         if (err) {
             console.log("database not connected", err);
         } else {  
             app.post('/add-products', (req, res) => {
                 const products = req.body;
-                console.log(products);
-                adminCollection.insertOne(products)
+                productCollection.insertOne(products)
                   .then(result => {
                     res.send(result.insertedCount > 0)
                   })
@@ -35,7 +33,7 @@ client.connect(err => {
                 })
               }) 
               app.get('/manage-products', (req, res) => {
-                adminCollection.find({})
+                productCollection.find({})
                 .toArray((err, document)=>{
                     res.send(document)
                 })
@@ -55,7 +53,7 @@ client.connect(err => {
                   })
               })
               app.delete('/delete/:id', (req, res) => {
-                adminCollection.deleteOne({_id: ObjectId(req.params.id)})
+                productCollection.deleteOne({_id: ObjectId(req.params.id)})
                 .then(result => {
                   res.send(result.deletedCount > 0)
                 })

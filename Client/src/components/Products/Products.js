@@ -8,7 +8,7 @@ const Products = (props) => {
 
     return (
         <>
-            <CardDeck className="text-center py-3 col-md-6 col-lg-3">
+            <CardDeck className="text-center py-3 mx-0 px-0 col-md-6 col-lg-3">
                 <Card>
                     <Card.Img variant="top pt-3 m-auto img" src={image} />
                     <Card.Body>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Nav, Button, Jumbotron, Table } from 'react-bootstrap';
+import { Nav, Button, Jumbotron, Table, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import manage from '../../icon/grid 1.png'
+import add from '../../icon/plus 1.png'
+import edit from '../../icon/edit 1.png'
 
 const ManageProduct = () => {
     const [products, setProducts] = useState([]);
@@ -31,19 +34,19 @@ const ManageProduct = () => {
             <div className="row py-4">
                 <div className="col-lg-2 aside">
                     <div>
-                        <h2>Fress velly</h2>
-                        <Nav.Link className="text-white" as={Link} to="/manage-product">Manage Product</Nav.Link>
-                        <Nav.Link className="text-white" as={Link} to="/add-product">Add Product</Nav.Link>
-                        <Nav.Link className="text-white" as={Link} to="/edit-product">Edit Product</Nav.Link>
+                        <h4>WeShopping</h4>
+                        <Nav.Link className="text-white" as={Link} to="/manage-product"><Image className="admin-icon" src={manage}/>Manage Product</Nav.Link>
+                        <Nav.Link className="text-white" as={Link} to="/add-product"><Image className="admin-icon" src={add}/>Add Product</Nav.Link>
+                        <Nav.Link className="text-white" as={Link} to="/edit-product"><Image className="admin-icon" src={edit}/>Edit Product</Nav.Link>
                     </div>
                 </div>
                 <div className="col-lg-10">
-                        <h2 className="my-3">Manage Products</h2>
+                        <h4 className="my-3">Manage Products</h4>
                     <Jumbotron className="py-4">
                         <Table className="text-center" responsive>
                             <thead>
                                 <tr>
-                                    <th>Product Name</th>
+                                    <th>Product Category</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                 </tr>

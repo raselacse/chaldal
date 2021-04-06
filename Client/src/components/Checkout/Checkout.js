@@ -40,7 +40,8 @@ const Checkout = () => {
     
     return (
         <>
-            <Jumbotron>
+            <Jumbotron className="mt-5 py-4">
+                <h4 className="py-2">Checkout</h4>
                 <Table responsive>
                     <thead>
                         <tr>

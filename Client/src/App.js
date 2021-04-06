@@ -10,12 +10,14 @@ import ManageProduct from './components/ManageProduct/ManageProduct';
 import Orders from './components/Orders/Orders';
 import Admin from './components/Admin/Admin';
 import AddProduct from '../src/components/AddProduct/AddProduct';
+import NotFound from './components/NotFound/NotFound';
 
 export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
+        <div className="container">
         <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
           <Router>
             <Header />
@@ -26,30 +28,31 @@ function App() {
               <Route path='/home'>
                 <Home />
               </Route>
-              <Route path='/admin'>
+              <PrivateRoute path='/admin'>
                 <Admin />
-              </Route>
-              <Route path='/checkout/:key'>
+              </PrivateRoute>
+              <PrivateRoute path='/checkout/:key'>
                 <Checkout />
-              </Route>
-              <Route path='/orders'>
+              </PrivateRoute>
+              <PrivateRoute path='/orders'>
                 <Orders />
-              </Route>
+              </PrivateRoute>
               <Route path='/login'>
                 <Login />
               </Route>
-              <Route path='/manage-product'>
+              <PrivateRoute path='/manage-product'>
                 <ManageProduct />
-              </Route>
-              <Route path='/add-product'>
+              </PrivateRoute>
+              <PrivateRoute path='/add-product'>
                 <AddProduct />
-              </Route>
+              </PrivateRoute>
               <Route path='*'>
-                <h1>Not Found !</h1>
+                <NotFound/>
               </Route>
             </Switch>
           </Router>
         </UserContext.Provider>
+        </div>
   );
 }
 

@@ -1,10 +1,12 @@
-import React, { useContext, Datepicker } from 'react';
+import React, { useContext } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
+import google from '../../icon/Group 573.png'
+import './Login.css'
 
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
@@ -22,8 +24,8 @@ const Login = () => {
         firebase.auth()
             .signInWithPopup(provider)
             .then((result) => {
-                const { displayName, email } = result.user;
-                const signedInUser = { name: displayName, email }
+                const { displayName, email, photoURL } = result.user;
+                const signedInUser = { name: displayName, email, photoURL}
                 setLoggedInUser(signedInUser);
                 history.replace(from);
             }).catch((error) => {
@@ -37,7 +39,9 @@ const Login = () => {
     return (
         <>
             <div className="d-flex justify-content-center align-items-center pt-5">
-                <Button onClick={signIn} variant="success">Continue with google</Button>
+                <Button onClick={signIn} variant="light border">
+                    <Image src={google} rounded />Continue with google
+                </Button>
             </div>            
         </>
     );

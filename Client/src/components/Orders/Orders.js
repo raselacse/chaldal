@@ -5,7 +5,6 @@ import moment from 'moment';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
-    console.log(orders)
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     useEffect(() => {
         fetch('http://localhost:27017/order-details?email=' + loggedInUser.email, {
@@ -18,7 +17,7 @@ const Orders = () => {
             .then(data => {
                 setOrders(data)
             })
-    }, [orders])
+    }, [loggedInUser.email, orders])
     return (
         <div className="pt-5">
             <h3>Your Orders</h3>
