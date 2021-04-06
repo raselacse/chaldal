@@ -1,6 +1,7 @@
 .aside{
     background-color: #203D37;
-    height: 100vh;
     color: white;
     text-align: center;
+    border-radius: 5px;
+    padding: 10px 0px;
 }

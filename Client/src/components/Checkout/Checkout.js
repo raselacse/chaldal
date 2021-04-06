@@ -24,11 +24,6 @@ const Checkout = () => {
     const [selectedDate, setSelectedDate] = useState({
         date: new Date()
     });
-    // const handleCheckInDate = (date) => {
-    //     const newDates = { ...selectedDate }
-    //     newDates.checkIn = date;
-    //     setSelectedDate(newDates);
-    // };
 
     const handleOrder = () => {
         const order = { ...loggedInUser, ...productDetails, ...selectedDate};
@@ -56,7 +51,7 @@ const Checkout = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{category}</td>
+                            <td>{title}</td>
                             <td>{1}</td>
                             <td>${price}</td>
                         </tr>
@@ -68,7 +63,7 @@ const Checkout = () => {
                     </tbody>
                 </Table>
                 <p className="f-right">
-                    <Button onClick={handleOrder} as={Link} to="/orders" variant="primary">Order</Button>
+                    <Button onClick={handleOrder} as={Link} to="/orders" variant="primary">Order Now</Button>
                 </p>
             </Jumbotron>
         </>

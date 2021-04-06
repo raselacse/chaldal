@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import { UserContext } from '../../App';
+import moment from 'moment';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
@@ -17,10 +18,11 @@ const Orders = () => {
             .then(data => {
                 setOrders(data)
             })
-    }, [])
+    }, [orders])
     return (
-        <>
-            <h3>You have: {orders.length}</h3>
+        <div className="pt-5">
+            <h3>Your Orders</h3>
+            <hr/>
             {
                 orders.map(order => <Jumbotron className="row justify-content-around align-items-center" key={order._id}>
                         <div className="img col-lg-3">
@@ -29,7 +31,7 @@ const Orders = () => {
                         <div className="content col-lg-7">
                             <h4>{order.title}</h4>
                             <p>Category: {order.category}</p>
-                            <p><small>Order Date: {order.date}</small></p>
+                            <p><small>Order Date: {moment(new Date(order.date)).format('MMMM Do YYYY, h:mm:ss a')}</small></p>
                         </div>
                         <div className="price col-lg-2">
                             <h6>Price: ${order.price}</h6>
@@ -37,7 +39,7 @@ const Orders = () => {
                     </Jumbotron>
                 )
             }
-        </>
+        </div>
     );
 };
 

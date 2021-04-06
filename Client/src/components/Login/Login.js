@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, Datepicker } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
@@ -22,11 +22,8 @@ const Login = () => {
         firebase.auth()
             .signInWithPopup(provider)
             .then((result) => {
-                // var credential = result.credential;
-                // var token = credential.accessToken;
-                // var user = result.user;
-                const {displayName, email} = result.user;
-                const signedInUser = {name: displayName, email} 
+                const { displayName, email } = result.user;
+                const signedInUser = { name: displayName, email }
                 setLoggedInUser(signedInUser);
                 history.replace(from);
             }).catch((error) => {
@@ -34,12 +31,14 @@ const Login = () => {
                 var errorMessage = error.message;
                 var email = error.email;
                 var credential = error.credential;
-                console.log(errorCode,errorMessage,email,credential)
+                console.log(errorCode, errorMessage, email, credential)
             });
     }
     return (
         <>
-            <Button onClick={signIn} variant="success">Continue with google</Button>
+            <div className="d-flex justify-content-center align-items-center pt-5">
+                <Button onClick={signIn} variant="success">Continue with google</Button>
+            </div>            
         </>
     );
 };
